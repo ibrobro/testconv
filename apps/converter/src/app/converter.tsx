@@ -3,6 +3,8 @@ import MyButton from "./components/form/MyButton";
 import ConverterInput from "./converter/input";
 import {convertDDToDMS} from '@testconv/functions';
 import ConverterOutput from "./converter/output";
+import MyGoogleMap from "./components/map/mygooglemap";
+import { LatLongTypes } from "@testconv/datadefinitions";
 
 
 /**
@@ -15,6 +17,8 @@ export function Converter() {
   const [longDD, setlongDD] = useState<string | undefined>(undefined);
   const [latDMS, setlatDMS] = useState<string | undefined>(undefined);
   const [longDMS, setlongDMS] = useState<string | undefined>(undefined);
+  const defaultCenter: LatLongTypes = {lat: 14.5667, lng: 121.060204};
+  const [currentCenter, setCurrentCenter] = React.useState<LatLongTypes>({...defaultCenter});
 
   const onDDLatLongChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -28,13 +32,20 @@ export function Converter() {
   };
 
   const doConversion = () => {
-    if(isNaN(Number(latDD)) || isNaN(Number(longDD))) {
+    const numLatDD = Number(latDD);
+    const numLongDD = Number(longDD); 
+    if(isNaN(numLatDD) || isNaN(Number(numLongDD))) {
       setErrorMessage('Please check coordinates again');
       return;
     }
+    
     setErrorMessage(undefined);
-    setlatDMS(convertDDToDMS(Number(latDD)));
-    setlongDMS(convertDDToDMS(Number(longDD)));
+    
+    const latdms = convertDDToDMS(numLatDD);
+    const longdms = convertDDToDMS(numLongDD);
+    setlatDMS(latdms);
+    setlongDMS(longdms);
+    setCurrentCenter({lat: numLatDD, lng: numLongDD})
   }
 
 
@@ -43,6 +54,7 @@ export function Converter() {
     setlongDD(undefined);
     setlatDMS(undefined);
     setlongDMS(undefined);
+    setCurrentCenter(defaultCenter);
   }
 
   return (
@@ -63,8 +75,14 @@ export function Converter() {
       <div className="mt-1 py-5 bg-cool-gray-100">
         <ConverterOutput latDMS={latDMS} longDMS={longDMS} />
       </div>
+      <div>
+        <MyGoogleMap 
+            center={{...currentCenter}}
+        />
+      </div>
     </div>
   );
 }
 
 export default Converter;
+                                      
