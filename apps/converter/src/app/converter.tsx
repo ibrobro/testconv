@@ -57,6 +57,34 @@ export function Converter() {
     setCurrentCenter(defaultCenter);
   }
 
+
+  const doSave = () => {
+    fetch(import.meta.env.VITE_FSTY_API+"/converter", {
+      method: "POST",
+      headers:  { 
+        "Content-Type": "application/json"
+      },
+      body:  JSON.stringify(
+        {
+          notes: '', 
+          lat: latDD, 
+          lng: longDD
+        }
+      ),
+      credentials: 'include'
+    })
+    .then(function(response){ 
+      return response.json();
+    })
+    .then(function(data){ 
+      alert("Ok " + data.message);
+    })
+    .catch((error) => {
+      alert("ERROR "+error.errorMessage);
+    })
+  }
+
+
   return (
     <div className="p-4">
       <h2 className="my-4 font-medium text-lime-900">
@@ -70,6 +98,14 @@ export function Converter() {
         <div className="flex flex-row gap-4">
           <MyButton label="Convert" onClick={doConversion} />
           <MyButton label="Reset" onClick={doReset} />
+          <MyButton 
+              label="save to api" 
+              onClick={doSave} 
+              disabled={ 
+                  currentCenter.lat === defaultCenter.lat && 
+                  currentCenter.lng === defaultCenter.lng 
+              } 
+          />
         </div>
       </div>
       <div className="mt-1 py-5 bg-cool-gray-100">

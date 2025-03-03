@@ -15,7 +15,7 @@ export default function MyButton({label, onClick, ...props}: MyButtonProps) {
     <div>
       <button 
         onClick={onClick}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 disabled:bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         {...props}
       >
         {label}
