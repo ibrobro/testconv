@@ -11,6 +11,12 @@
     },
     {
       "path": "./packages/datadefinitions"
+    },
+    {
+      "path": "./apps/fastify-api"
+    },
+    {
+      "path": "./apps/fsty-api"
     }
   ]
 }

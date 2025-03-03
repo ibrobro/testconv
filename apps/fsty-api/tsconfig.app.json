@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "out-tsc/fsty-api",
+    "types": ["node"],
+    "rootDir": "src",
+    "tsBuildInfoFile": "out-tsc/fsty-api/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": []
+}
