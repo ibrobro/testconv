@@ -10,6 +10,9 @@
 # Install packages / dependencies
 - npm install
 
+# Run Python script to create MongoDB from workspace root
+- py packages/db/db_alter_coords.py
+
 # To run front end
 - npx nx dev converter
 
