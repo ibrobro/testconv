@@ -46,6 +46,7 @@ export function Converter() {
     setlatDMS(latdms);
     setlongDMS(longdms);
     setCurrentCenter({lat: numLatDD, lng: numLongDD})
+    doSave();
   }
 
 
@@ -96,16 +97,8 @@ export function Converter() {
       <div className="border border-blue-200 rounded-lg p-5 bg-cool-gray-100">
         <ConverterInput lat={latDD} long={longDD} onChange={onDDLatLongChanges} />
         <div className="flex flex-row gap-4">
-          <MyButton label="Convert" onClick={doConversion} />
+          <MyButton label="Convert Coords" onClick={doConversion} />
           <MyButton label="Reset" onClick={doReset} />
-          <MyButton 
-              label="save to api" 
-              onClick={doSave} 
-              disabled={ 
-                  currentCenter.lat === defaultCenter.lat && 
-                  currentCenter.lng === defaultCenter.lng 
-              } 
-          />
         </div>
       </div>
       <div className="mt-1 py-5 bg-cool-gray-100">

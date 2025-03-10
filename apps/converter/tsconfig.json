@@ -3,6 +3,12 @@
   "include": [],
   "references": [
     {
+      "path": "../../packages/functions"
+    },
+    {
+      "path": "../../packages/datadefinitions"
+    },
+    {
       "path": "./tsconfig.app.json"
     }
   ],

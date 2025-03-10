@@ -12,6 +12,13 @@ const server = Fastify({
 // Register your application as a normal plugin.
 server.register(app);
 
+server.register(require('@fastify/mongodb'), {
+  // force to close the mongodb connection when app stopped
+  // the default value is false
+  forceClose: true,
+  url: 'mongodb://localhost:27017/test_coords'
+})
+
 // Start listening.
 server.listen({ port, host }, (err) => {
   if (err) {
